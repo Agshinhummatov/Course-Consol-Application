@@ -32,7 +32,9 @@ while (true)
             case 4:
                 teacherController.SerachTeacher();
                 break;
-
+            case 5:
+                teacherController.GetById();
+                break;
             default:
                 ConsoleColor.Red.WriteConsole("Please add correct option");
                 goto Option;
@@ -51,5 +53,5 @@ while (true)
 static void GetOptions()
 {
     ConsoleColor.Cyan.WriteConsole("Please select one option :");
-    ConsoleColor.Cyan.WriteConsole("Teacher options : 1 - Create, 2 - Get all, 3 - Delete, 4 - Search teacher");
+    ConsoleColor.Cyan.WriteConsole("Teacher options : 1 -  Create Teacher, 2 - Get all teachers, 3 - Delete Teacher, 4 - Search teacher, 5 - Get teacher by id");
 }

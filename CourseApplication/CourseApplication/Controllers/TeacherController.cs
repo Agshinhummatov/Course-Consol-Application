@@ -21,26 +21,26 @@ namespace CourseApplication.Controllers
 
         public void Create()
         {
-            ConsoleColor.Red.WriteConsole("Please add teacher name :");
+            ConsoleColor.DarkGreen.WriteConsole("Please add teacher name :");
             TeacherName: string teacherName = Console.ReadLine();
 
             if (teacherName == string.Empty)
             {
-                ConsoleColor.Red.WriteConsole("Please dont empty teacher name");
+                ConsoleColor.DarkGreen.WriteConsole("Please dont empty teacher name");
                 goto TeacherName;
             }
 
 
-            ConsoleColor.Red.WriteConsole("Please add teacher surname ");
+            ConsoleColor.DarkGreen.WriteConsole("Please add teacher surname ");
             TeacherSurname : string teacherSurname = Console.ReadLine();
 
             if (teacherSurname == string.Empty)
             {
-                ConsoleColor.Red.WriteConsole("Please dont empty teacher surname");
+                ConsoleColor.DarkGreen.WriteConsole("Please dont empty teacher surname");
                 goto TeacherSurname;
             }
 
-            ConsoleColor.Red.WriteConsole("Please add teacher adress ");
+            ConsoleColor.DarkGreen.WriteConsole("Please add teacher adress ");
             TeacherAddress: string teacherAddress = Console.ReadLine();
 
             if (teacherAddress == string.Empty)
@@ -169,7 +169,7 @@ namespace CourseApplication.Controllers
 
                 foreach (var item in response)
                 {
-                    ConsoleColor.Green.WriteConsole($"Id: {item.Id}, Name: {item.Name}, Seat count: {item.Surname}");
+                    ConsoleColor.Green.WriteConsole($"Id: {item.Id}, Name: {item.Name}, Surname: {item.Surname}");
                 }
             }
             catch (Exception ex)
@@ -179,14 +179,41 @@ namespace CourseApplication.Controllers
             }
         }
 
-
+       
         public void GetById()
         {
-            var result = _teacherService.GetById();
+            ConsoleColor.DarkCyan.WriteConsole("Please add teacher id :");
+            TeacherId: string teacherId = Console.ReadLine();
+
+            int id;
+            bool isCorrectId = int.TryParse(teacherId, out id);
+
+            if (isCorrectId)
+            {
+                try
+                {
+                    var response = _teacherService.GetById(id);
+                    
+            
+                        ConsoleColor.Green.WriteConsole($"Id: {response.Id}, Name: {response.Name}, Surname: {response.Surname} Age:{response.Age} {response.Address}");
+                    
+                }
+                catch (Exception ex)
+                {
+                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add teacher id again");
+                    goto TeacherId;
+                }
+
+            }
+            else
+            {
+                ConsoleColor.Red.WriteConsole("Please add correct format teacher id");
+                goto TeacherId;
+            }
 
             
-
         }
+       
 
     }
 }
