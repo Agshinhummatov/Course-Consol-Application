@@ -152,6 +152,33 @@ namespace CourseApplication.Controllers
         }
 
 
+        public void SerachTeacher()
+        {
+            ConsoleColor.DarkCyan.WriteConsole("Please add search text:");
+            SearchText: string searchText = Console.ReadLine();
+
+            if (searchText == string.Empty)
+            {
+                ConsoleColor.Red.WriteConsole("Please dont empty search text");
+                goto SearchText;
+            }
+
+            try
+            {
+                var response = _teacherService.Search(searchText);
+
+                foreach (var item in response)
+                {
+                    ConsoleColor.Green.WriteConsole($"Id: {item.Id}, Name: {item.Name}, Seat count: {item.Surname}");
+                }
+            }
+            catch (Exception ex)
+            {
+                ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add search text again");
+                goto SearchText;
+            }
+        }
+
 
     }
 }

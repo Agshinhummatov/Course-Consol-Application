@@ -1,5 +1,6 @@
 ﻿using DomianLayer.Common;
 using RepositoryLayer.Repositories;
+using ServiceLayer.Exceptions;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -57,7 +58,11 @@ namespace ServiceLayer.Services
 
         public List<Teacher> Search(string searchText)
         {
-            throw new NotImplementedException();
+            List<Teacher> teachers = _repo.GetAll(m => m.Name.ToLower().Contains(searchText.ToLower()));
+
+            if (teachers.Count == 0) throw new NotImplementedException(); /*throw new NotFoundException(/*ResponseMessages.NotFound*//*);*/
+
+            return teachers;
         }
 
         public Teacher Update(int id, Teacher teacher)
