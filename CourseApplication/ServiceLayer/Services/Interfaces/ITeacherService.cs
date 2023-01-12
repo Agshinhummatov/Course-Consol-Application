@@ -13,14 +13,11 @@ namespace ServiceLayer.Services.Interfaces
         Teacher Create(Teacher teacher);
 
         public void Delete(int? id);
-        Teacher GetById(int id);
+        Teacher GetById(int? id);
         List<Teacher> Search(string searchText);
         
         List<Teacher> GetAll();
         Teacher Update(int id, Teacher teacher);
-
-
-
-
+        
     }
 }

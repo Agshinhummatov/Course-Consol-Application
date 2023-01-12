@@ -51,5 +51,5 @@ while (true)
 static void GetOptions()
 {
     ConsoleColor.Cyan.WriteConsole("Please select one option :");
-    ConsoleColor.Cyan.WriteConsole("Teacher options : 1 - Create, 2 - Get all, 3 - Delete,4 - Search techer");
+    ConsoleColor.Cyan.WriteConsole("Teacher options : 1 - Create, 2 - Get all, 3 - Delete, 4 - Search teacher");
 }

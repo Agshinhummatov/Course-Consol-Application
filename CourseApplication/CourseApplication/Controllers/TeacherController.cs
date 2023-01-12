@@ -180,6 +180,14 @@ namespace CourseApplication.Controllers
         }
 
 
+        public void GetById()
+        {
+            var result = _teacherService.GetById();
+
+            
+
+        }
+
     }
 }
 
