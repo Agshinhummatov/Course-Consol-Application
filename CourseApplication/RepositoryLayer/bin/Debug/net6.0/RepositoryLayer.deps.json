@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "RepositoryLayer/1.0.0": {
+        "dependencies": {
+          "DomianLayer": "1.0.0"
+        },
+        "runtime": {
+          "RepositoryLayer.dll": {}
+        }
+      },
+      "DomianLayer/1.0.0": {
+        "runtime": {
+          "DomianLayer.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "RepositoryLayer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DomianLayer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

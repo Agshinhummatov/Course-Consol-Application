@@ -1,0 +1,62 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "CourseApplication/1.0.0": {
+        "dependencies": {
+          "ServiceLayer": "1.0.0"
+        },
+        "runtime": {
+          "CourseApplication.dll": {}
+        }
+      },
+      "DomianLayer/1.0.0": {
+        "runtime": {
+          "DomianLayer.dll": {}
+        }
+      },
+      "RepositoryLayer/1.0.0": {
+        "dependencies": {
+          "DomianLayer": "1.0.0"
+        },
+        "runtime": {
+          "RepositoryLayer.dll": {}
+        }
+      },
+      "ServiceLayer/1.0.0": {
+        "dependencies": {
+          "RepositoryLayer": "1.0.0"
+        },
+        "runtime": {
+          "ServiceLayer.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CourseApplication/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DomianLayer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RepositoryLayer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ServiceLayer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

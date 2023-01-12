@@ -1,0 +1,15 @@
+C:\Users\User-BT\Desktop\Course application\CourseApplication\RepositoryLayer\bin\Debug\net6.0\RepositoryLayer.deps.json
+C:\Users\User-BT\Desktop\Course application\CourseApplication\RepositoryLayer\bin\Debug\net6.0\RepositoryLayer.dll
+C:\Users\User-BT\Desktop\Course application\CourseApplication\RepositoryLayer\bin\Debug\net6.0\RepositoryLayer.pdb
+C:\Users\User-BT\Desktop\Course application\CourseApplication\RepositoryLayer\bin\Debug\net6.0\DomianLayer.dll
+C:\Users\User-BT\Desktop\Course application\CourseApplication\RepositoryLayer\bin\Debug\net6.0\DomianLayer.pdb
+C:\Users\User-BT\Desktop\Course application\CourseApplication\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.csproj.AssemblyReference.cache
+C:\Users\User-BT\Desktop\Course application\CourseApplication\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User-BT\Desktop\Course application\CourseApplication\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.AssemblyInfoInputs.cache
+C:\Users\User-BT\Desktop\Course application\CourseApplication\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.AssemblyInfo.cs
+C:\Users\User-BT\Desktop\Course application\CourseApplication\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.csproj.CoreCompileInputs.cache
+C:\Users\User-BT\Desktop\Course application\CourseApplication\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.csproj.CopyComplete
+C:\Users\User-BT\Desktop\Course application\CourseApplication\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.dll
+C:\Users\User-BT\Desktop\Course application\CourseApplication\RepositoryLayer\obj\Debug\net6.0\refint\RepositoryLayer.dll
+C:\Users\User-BT\Desktop\Course application\CourseApplication\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.pdb
+C:\Users\User-BT\Desktop\Course application\CourseApplication\RepositoryLayer\obj\Debug\net6.0\ref\RepositoryLayer.dll
