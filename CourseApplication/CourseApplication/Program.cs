@@ -24,10 +24,10 @@ while (true)
                 teacherController.Create();
                 break;
             case 2:
-                Console.WriteLine("Get all");
+                teacherController.GetAll(); 
                 break;
             case 3:
-                Console.WriteLine("Delete");
+                teacherController.Delete();
                 break;
             default:
                 ConsoleColor.Red.WriteConsole("Please add correct option");

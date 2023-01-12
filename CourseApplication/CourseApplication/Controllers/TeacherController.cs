@@ -77,7 +77,7 @@ namespace CourseApplication.Controllers
                     var response = _teacherService.Create(teacher);
 
 
-                    ConsoleColor.Green.WriteConsole($"Id: {response.Id} {response.Name} {response.Surname} {response.Age} {response.Age}");
+                    ConsoleColor.Green.WriteConsole($"Id: {response.Id} {response.Name} {response.Surname} {response.Age} {response.Address}");
 
 
                 }
@@ -100,7 +100,60 @@ namespace CourseApplication.Controllers
 
 
 
+
         }
+
+        public void GetAll()
+        {
+            var result = _teacherService.GetAll();
+
+            if (result.Count == 0)
+            {
+                ConsoleColor.Red.WriteConsole("Data not found");
+            }
+            else
+            {
+                foreach (var item in result)
+                {
+                    ConsoleColor.Green.WriteConsole($"Id: {item.Id}, Name: {item.Name}, Surname: {item.Surname} Age:{item.Age} {item.Address}");
+                }
+            }
+        }
+
+
+        public void Delete()
+        {
+            ConsoleColor.DarkCyan.WriteConsole("Please add teacher id for delete:");
+          TeacherId : string teacherId = Console.ReadLine();
+
+            int id;
+
+            bool isCorrectId = int.TryParse(teacherId, out id);
+
+            if (isCorrectId)
+            {
+                try
+                {
+                    _teacherService.Delete(id);
+                    ConsoleColor.Green.WriteConsole("Successfully deleted");
+                }
+                catch (Exception ex)
+                {
+                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add teacher id again");
+                    goto TeacherId;
+                }
+
+            }
+            else
+            {
+                ConsoleColor.Red.WriteConsole("Please add correct format teacher id");
+                goto TeacherId;
+            }
+        }
+
+
 
     }
 }
+
+

@@ -47,8 +47,7 @@ namespace ServiceLayer.Services
 
         public List<Teacher> GetAll()
         {
-
-            throw new NotImplementedException();
+            return _repo.GetAll();
         }
 
         public Teacher GetById(int id)
