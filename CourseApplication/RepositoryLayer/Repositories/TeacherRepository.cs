@@ -37,9 +37,17 @@ namespace RepositoryLayer.Repositories
             return predicate == null ? AppDbContext<Teacher>.datas : AppDbContext<Teacher>.datas.FindAll(predicate);
         }
 
-        public void Update(Teacher entity)
+       
+
+        public void Update(  Teacher entity )
         {
-            throw new NotImplementedException();
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            AppDbContext<Teacher>.datas.Add(entity);
+
+
         }
         
        

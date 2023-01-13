@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CourseApplication.Controllers
@@ -24,19 +25,31 @@ namespace CourseApplication.Controllers
             ConsoleColor.DarkGreen.WriteConsole("Please add teacher name :");
             TeacherName: string teacherName = Console.ReadLine();
 
+            string pattern = @"^(?!\\s+$)[a-zA-Z,'. -]+$";
+
+
             if (teacherName == string.Empty)
             {
                 ConsoleColor.DarkGreen.WriteConsole("Please dont empty teacher name");
                 goto TeacherName;
             }
-
-
+            else if (!Regex.IsMatch(teacherName, pattern))
+            {
+                ConsoleColor.Red.WriteConsole("Cannot be a symbol. Plase try again");
+                goto TeacherName;
+            }
+           
             ConsoleColor.DarkGreen.WriteConsole("Please add teacher surname ");
             TeacherSurname : string teacherSurname = Console.ReadLine();
 
             if (teacherSurname == string.Empty)
             {
                 ConsoleColor.DarkGreen.WriteConsole("Please dont empty teacher surname");
+                goto TeacherSurname;
+            }
+            else if (!Regex.IsMatch(teacherSurname, pattern))
+            {
+                ConsoleColor.Red.WriteConsole("Cannot be a symbol. Plase try again");
                 goto TeacherSurname;
             }
 
@@ -213,7 +226,110 @@ namespace CourseApplication.Controllers
 
             
         }
-       
+
+
+        public void Update()
+        {
+            ConsoleColor.DarkCyan.WriteConsole("Please add teacher id :");
+           TeacherId: string teacherId = Console.ReadLine();
+
+            int id;
+            bool isCorrectId = int.TryParse(teacherId, out id);
+
+            ConsoleColor.DarkGreen.WriteConsole("Please add teacher name :");
+          TeacherName: string teacherName = Console.ReadLine();
+
+            string pattern = @"^(?!\\s+$)[a-zA-Z,'. -]+$";
+
+
+
+            if (teacherName == string.Empty)
+            {
+                ConsoleColor.DarkGreen.WriteConsole("Please dont empty teacher name");
+                goto TeacherName;
+            }
+            else if (!Regex.IsMatch(teacherName, pattern))
+            {
+                ConsoleColor.Red.WriteConsole("Cannot be a symbol. Plase try again");
+                goto TeacherName;
+            }
+
+            ConsoleColor.DarkGreen.WriteConsole("Please add teacher surname ");
+        TeacherSurname: string teacherSurname = Console.ReadLine();
+
+            if (teacherSurname == string.Empty)
+            {
+                ConsoleColor.DarkGreen.WriteConsole("Please dont empty teacher surname");
+                goto TeacherSurname;
+            }
+            else if (!Regex.IsMatch(teacherSurname, pattern))
+            {
+                ConsoleColor.Red.WriteConsole("Cannot be a symbol. Plase try again");
+                goto TeacherSurname;
+            }
+
+            ConsoleColor.DarkGreen.WriteConsole("Please add teacher adress ");
+        TeacherAddress: string teacherAddress = Console.ReadLine();
+
+            if (teacherAddress == string.Empty)
+            {
+                ConsoleColor.Red.WriteConsole("Please dont empty teacher adress");
+                goto TeacherAddress;
+            }
+
+
+            ConsoleColor.Red.WriteConsole("Please add teacher age ");
+        TeacherAge: string teacherAgestr = Console.ReadLine();
+
+            int teacherAge;
+
+            bool isCorrectTeacherAge = int.TryParse(teacherAgestr, out teacherAge);
+
+
+
+            if (isCorrectTeacherAge && isCorrectId)
+            {
+
+                try
+                {
+                    Teacher teacher = new Teacher
+                    {
+                        Name = teacherName,
+
+                        Surname = teacherSurname,
+
+                        Address = teacherAddress,
+
+                        //Age = teacherAge,
+
+                        Id =id
+
+                    };
+
+                    var response = _teacherService.Update(id,teacher);
+
+
+                    ConsoleColor.Green.WriteConsole($"Id: {response.Id} {response.Name} {response.Surname} {response.Age} {response.Address}");
+
+
+                }
+                catch (Exception ex)
+                {
+                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Plase try again");
+                    goto TeacherName;
+                }
+
+
+            }
+            else
+            {
+
+                ConsoleColor.Red.WriteConsole("Please add correct format teacher age");
+                goto TeacherAge;
+            }
+
+
+        }
 
     }
 }

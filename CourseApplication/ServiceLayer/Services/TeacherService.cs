@@ -1,6 +1,7 @@
 ﻿using DomianLayer.Common;
 using RepositoryLayer.Repositories;
 using ServiceLayer.Exceptions;
+using ServiceLayer.Helpers.Constants;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -26,9 +27,6 @@ namespace ServiceLayer.Services
         {
             
             teacher.Id = _count;
-            Teacher existTeacher = _repo.Get(m=>m.Name.ToLower() == teacher.Name.ToLower());
-            if (existTeacher != null) throw new Exception("Data already exist");
-
             _repo.Create(teacher);
             _count++;
             return teacher;
@@ -59,16 +57,18 @@ namespace ServiceLayer.Services
 
         public List<Teacher> Search(string searchText)
         {
-            List<Teacher> teachers = _repo.GetAll(m => m.Name.ToLower().Contains(searchText.ToLower()));
+            List<Teacher> teachers = _repo.GetAll(m => m.Name.ToLower().Contains(searchText.ToLower()) || m.Surname.ToLower().Contains(searchText.ToLower()));
 
-            if (teachers.Count == 0) throw new NotImplementedException(); /*throw new NotFoundException(/*ResponseMessages.NotFound*//*);*/
+            if (teachers.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
 
             return teachers;
         }
 
         public Teacher Update(int id, Teacher teacher)
         {
-            throw new NotImplementedException();
+            if (id != null) throw new NotImplementedException();
+            if (teacher != null) throw new NotImplementedException();
+            return teacher;
         }
 
 

@@ -2,9 +2,11 @@
 
 using CourseApplication.Controllers;
 using ServiceLayer.Helpers;
+using ServiceLayer.Helpers.Enums;
 
 TeacherController teacherController = new();
 
+GroupController groupController = new();
 
 while (true)
 {
@@ -20,7 +22,7 @@ while (true)
     {
         switch (selectOption)
         {
-            case 1:
+            case (int)Options.CreateTecher:
                 teacherController.Create();
                 break;
             case 2:
@@ -34,6 +36,13 @@ while (true)
                 break;
             case 5:
                 teacherController.GetById();
+                break;
+            case 6:
+                teacherController.Update();
+                break;
+            case 7:
+
+                groupController.Create();
                 break;
             default:
                 ConsoleColor.Red.WriteConsole("Please add correct option");
@@ -53,5 +62,5 @@ while (true)
 static void GetOptions()
 {
     ConsoleColor.Cyan.WriteConsole("Please select one option :");
-    ConsoleColor.Cyan.WriteConsole("Teacher options : 1 -  Create Teacher, 2 - Get all teachers, 3 - Delete Teacher, 4 - Search teacher, 5 - Get teacher by id");
+    ConsoleColor.Cyan.WriteConsole("Teacher options : \n 1 -  Create Teacher, \n 2 - Get all teachers, \n 3 - Delete Teacher, \n 4 - Search teacher,\n 5 - Get teacher by id, \n 6 - Update");
 }

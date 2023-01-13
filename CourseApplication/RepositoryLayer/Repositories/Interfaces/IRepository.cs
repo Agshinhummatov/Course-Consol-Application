@@ -14,5 +14,7 @@ namespace RepositoryLayer.Repositories.Interfaces
         void Update(T entity);
         T Get(Predicate<T> predicate);
         List<T> GetAll(Predicate<T> predicate);
+
+        
     }
 }
