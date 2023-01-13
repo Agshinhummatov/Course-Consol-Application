@@ -66,8 +66,16 @@ namespace ServiceLayer.Services
 
         public Teacher Update(int id, Teacher teacher)
         {
-            if (id != null) throw new NotImplementedException();
-            if (teacher != null) throw new NotImplementedException();
+            if (id == null) throw new ArgumentNullException();
+            if (teacher == null) throw new ArgumentNullException();
+            var res = GetById(id);
+            if (res != null)
+            {
+                teacher.Id = res.Id;
+                res.Name = teacher.Name;
+
+                _repo.Update(teacher);
+            }
             return teacher;
         }
 

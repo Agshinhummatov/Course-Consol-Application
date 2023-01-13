@@ -35,7 +35,10 @@ namespace CourseApplication.Controllers
             }
 
 
+            //DateTime dateTime= DateTime.Now;
 
+
+            //bool dateTime = DateTime.TryParse(groupCapacitystr, out groupCapacity);
 
             ConsoleColor.Red.WriteConsole("Please add group capacity ");
             GroupCapacity: string groupCapacitystr = Console.ReadLine();

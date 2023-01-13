@@ -6,7 +6,7 @@ using ServiceLayer.Helpers.Enums;
 
 TeacherController teacherController = new();
 
-GroupController groupController = new();
+
 
 while (true)
 {
@@ -22,7 +22,7 @@ while (true)
     {
         switch (selectOption)
         {
-            case (int)Options.CreateTecher:
+            case 1:/*(int)Options.CreateTecher:*/
                 teacherController.Create();
                 break;
             case 2:
@@ -40,10 +40,7 @@ while (true)
             case 6:
                 teacherController.Update();
                 break;
-            case 7:
-
-                groupController.Create();
-                break;
+            
             default:
                 ConsoleColor.Red.WriteConsole("Please add correct option");
                 goto Option;

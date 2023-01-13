@@ -230,106 +230,108 @@ namespace CourseApplication.Controllers
 
         public void Update()
         {
-            ConsoleColor.DarkCyan.WriteConsole("Please add teacher id :");
-           TeacherId: string teacherId = Console.ReadLine();
+            ConsoleColor.Cyan.WriteConsole("Please add teacher id");
+            string IdTeach = Console.ReadLine();
 
             int id;
-            bool isCorrectId = int.TryParse(teacherId, out id);
-
-            ConsoleColor.DarkGreen.WriteConsole("Please add teacher name :");
-          TeacherName: string teacherName = Console.ReadLine();
-
-            string pattern = @"^(?!\\s+$)[a-zA-Z,'. -]+$";
-
-
-
-            if (teacherName == string.Empty)
+            bool isCorrectId = int.TryParse(IdTeach, out id);
+            if (!isCorrectId)
             {
-                ConsoleColor.DarkGreen.WriteConsole("Please dont empty teacher name");
-                goto TeacherName;
-            }
-            else if (!Regex.IsMatch(teacherName, pattern))
-            {
-                ConsoleColor.Red.WriteConsole("Cannot be a symbol. Plase try again");
-                goto TeacherName;
+                ConsoleColor.Red.WriteConsole("Please add correct format teacher id:");
             }
 
-            ConsoleColor.DarkGreen.WriteConsole("Please add teacher surname ");
+            string pattern2 = "^(?!s+$)[a-zA-Z,'. -]+$";
+
+
+            ConsoleColor.Cyan.WriteConsole("Please add teacher name");
+        TeacherName: string teacherName = Console.ReadLine();
+            try
+            {
+                if (!Regex.IsMatch(teacherName, pattern2))
+                {
+                    ConsoleColor.Cyan.WriteConsole("Please add correct teacher name");
+                    goto TeacherName;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                ConsoleColor.Cyan.WriteConsole(ex.Message);
+            }
+            ConsoleColor.Cyan.WriteConsole("Please add teacher Surname");
         TeacherSurname: string teacherSurname = Console.ReadLine();
-
-            if (teacherSurname == string.Empty)
+            try
             {
-                ConsoleColor.DarkGreen.WriteConsole("Please dont empty teacher surname");
-                goto TeacherSurname;
+                if (!Regex.IsMatch(teacherSurname, pattern2))
+                {
+                    ConsoleColor.Cyan.WriteConsole("Please add correct teacher Surname");
+                    goto TeacherSurname;
+                }
             }
-            else if (!Regex.IsMatch(teacherSurname, pattern))
+            catch (Exception ex)
             {
-                ConsoleColor.Red.WriteConsole("Cannot be a symbol. Plase try again");
-                goto TeacherSurname;
-            }
-
-            ConsoleColor.DarkGreen.WriteConsole("Please add teacher adress ");
-        TeacherAddress: string teacherAddress = Console.ReadLine();
-
-            if (teacherAddress == string.Empty)
-            {
-                ConsoleColor.Red.WriteConsole("Please dont empty teacher adress");
-                goto TeacherAddress;
+                ConsoleColor.Cyan.WriteConsole(ex.Message);
             }
 
+            ConsoleColor.Cyan.WriteConsole("Please add teacher address");
+        teachAddress: string teachAddress = Console.ReadLine();
+            try
+            {
+                if (!Regex.IsMatch(teacherName, pattern2))
+                {
+                    ConsoleColor.Cyan.WriteConsole("Update correct teacher name");
+                    goto teachAddress;
+                }
+            }
+            catch (Exception ex)
+            {
+                ConsoleColor.Cyan.WriteConsole(ex.Message);
+            }
 
-            ConsoleColor.Red.WriteConsole("Please add teacher age ");
-        TeacherAge: string teacherAgestr = Console.ReadLine();
+            ConsoleColor.Cyan.WriteConsole("Please add teacher age");
+        TeacherAge: string teacherAgesStr = Console.ReadLine();
 
             int teacherAge;
 
-            bool isCorrectTeacherAge = int.TryParse(teacherAgestr, out teacherAge);
+            bool isCorrectTeacherAge = int.TryParse(teacherAgesStr, out teacherAge);
 
-
-
-            if (isCorrectTeacherAge && isCorrectId)
+            if (isCorrectTeacherAge)
             {
-
                 try
                 {
-                    Teacher teacher = new Teacher
+
+                    if (!Regex.IsMatch(IdTeach, pattern2))
+                    {
+                        ConsoleColor.Cyan.WriteConsole("Please add correct Id");
+                        goto TeacherSurname;
+                    }
+                    Teacher teacher = new Teacher()
                     {
                         Name = teacherName,
-
                         Surname = teacherSurname,
-
-                        Address = teacherAddress,
-
-                        //Age = teacherAge,
-
-                        Id =id
+                        Address = teachAddress,
+                        Age = teacherAge
 
                     };
-
-                    var response = _teacherService.Update(id,teacher);
-
-
-                    ConsoleColor.Green.WriteConsole($"Id: {response.Id} {response.Name} {response.Surname} {response.Age} {response.Address}");
-
-
+                    Teacher teacher1 = new();
+                    teacher1 = _teacherService.Update(id, teacher);
+                    //_teacherService.Delete(teacher1.Id);
+                    ConsoleColor.Cyan.WriteConsole("Succesfully updated");
                 }
                 catch (Exception ex)
                 {
-                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Plase try again");
-                    goto TeacherName;
+                    ConsoleColor.Cyan.WriteConsole(ex.Message);
                 }
-
-
             }
             else
             {
-
-                ConsoleColor.Red.WriteConsole("Please add correct format teacher age");
-                goto TeacherAge;
+                ConsoleColor.Red.WriteConsole("Please add correct format teacher age:");
             }
 
 
         }
+
+
 
     }
 }

@@ -30,7 +30,12 @@ namespace RepositoryLayer.Repositories
             throw new NotImplementedException();
         }
 
-        public void Update(Group entity)
+        //public void Update(Group entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        bool IRepository<Group>.Update(Group entity)
         {
             throw new NotImplementedException();
         }
