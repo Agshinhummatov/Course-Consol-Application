@@ -17,7 +17,11 @@ namespace CourseApplication.Controllers
         private readonly IGroupService _groupService;
         public GroupController()
         {
-            ConsoleColor.DarkGreen.WriteConsole("Please add group name :");
+            _groupService= new GroupService();
+        }
+        public void GroupCreat()
+        {
+           ConsoleColor.DarkGreen.WriteConsole("Please add group name :");
            GroupName: string groupName = Console.ReadLine();
 
             string pattern = @"^(?!\\s+$)[a-zA-Z,'. -]+$";
@@ -45,9 +49,9 @@ namespace CourseApplication.Controllers
 
             int groupCapacity;
 
-            bool isCorrectgroupCapacitystr = int.TryParse(groupCapacitystr, out groupCapacity);
+            bool isCorrectGroupCapacitystr = int.TryParse(groupCapacitystr, out groupCapacity);
 
-            if (isCorrectgroupCapacitystr)
+            if (isCorrectGroupCapacitystr)
             {
 
                 try
@@ -60,7 +64,6 @@ namespace CourseApplication.Controllers
                     };
 
                     var response = _groupService.Create(group);
-
 
                     ConsoleColor.Green.WriteConsole($" Id: {response.Id} {response.Name} {response.Capacity}");
 

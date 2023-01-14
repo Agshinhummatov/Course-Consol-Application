@@ -31,12 +31,27 @@ namespace ServiceLayer.Services
             throw new NotImplementedException();
         }
 
-        public List<Group> GetAll()
+        public Group GetGroupById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Group GetById(int id)
+        public List<Group> GetGroupsByCapity(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Group> GetGroupsByTeacherId(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Group> GetGroupsByTeacherName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Group> GetGroupsCount()
         {
             throw new NotImplementedException();
         }
@@ -46,7 +61,7 @@ namespace ServiceLayer.Services
             throw new NotImplementedException();
         }
 
-        public Group Update(int id, Teacher group)
+        public Group Update(int id, Group group)
         {
             throw new NotImplementedException();
         }

@@ -16,5 +16,6 @@ namespace DomianLayer.Common
         public DateTime CreateDate { get; set; }
 
         public Teacher  Teacher { get; set; }
+
     }
 }

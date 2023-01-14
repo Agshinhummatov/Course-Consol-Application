@@ -12,11 +12,21 @@ namespace ServiceLayer.Services.Interfaces
 
         Group Create(Group group);
 
-        public void Delete(int? id);
-        Group GetById(int id);
+        void Delete(int? id);
+        Group GetGroupById(int id);
         List<Group> Search(string searchText);
 
-        List<Group> GetAll();
-        Group Update(int id, Teacher group);
+        
+        Group Update(int id, Group group);
+
+        List<Group> GetGroupsByCapity(int Id);
+        List<Group> GetGroupsByTeacherName(string name);
+
+        List<Group> GetGroupsByTeacherId(int Id);
+
+        List<Group> GetGroupsCount();
+
+
+
     }
 }
