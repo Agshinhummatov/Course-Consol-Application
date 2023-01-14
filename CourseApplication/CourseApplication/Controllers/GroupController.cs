@@ -79,7 +79,7 @@ namespace CourseApplication.Controllers
                     ConsoleColor.Green.WriteConsole
                     (
                         $"id: {group.Id}, Name: {group.Name} Capacity : {group.Capacity}," +
-                        $" Creat data {group.CreateDate.ToString("yyyy, mm,dd")}," +
+                        $" Creat data {group.CreateDate.ToString("yyyy,MM,dd")}," +
                         $" Teacher:{group.Teacher.Id},{group.Teacher.Name} {group.Teacher.Surname}," +
                         $"{group.Teacher.Age},{group.Teacher.Address}"
                     );

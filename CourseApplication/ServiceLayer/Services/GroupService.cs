@@ -1,5 +1,6 @@
 ﻿using DomianLayer.Entities;
 using RepositoryLayer.Repositories;
+using ServiceLayer.Helpers.Constants;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -24,8 +25,10 @@ namespace ServiceLayer.Services
 
         public Group Create(Group group, int teacherId)
         {
-            Teacher teacher =_teacher.Get(m=>m.Id == teacherId);
             group.Id = _count;
+            Teacher teacher =_teacher.Get(m=>m.Id == teacherId);
+            group.Teacher = teacher;
+            if (teacher is null) throw new Exception(ResponseMessages.NotFound);
             _repo.Create(group);
             _count++;
             return group;
