@@ -1,4 +1,4 @@
-﻿using DomianLayer.Common;
+﻿using DomianLayer.Entities;
 using RepositoryLayer.Data;
 using RepositoryLayer.Repositories.Interfaces;
 using System;

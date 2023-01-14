@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomianLayer.Common
+namespace DomianLayer.Entities
 {
      public class Teacher : BaseEntity
-    {
+     {
         public string Name { get; set; }
         public string Surname { get; set; }
 
@@ -16,5 +16,5 @@ namespace DomianLayer.Common
 
         public string Address { get; set; }
 
-    }
+     }
 }

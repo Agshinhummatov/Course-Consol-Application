@@ -1,4 +1,4 @@
-﻿using DomianLayer.Common;
+﻿using DomianLayer.Entities;
 using RepositoryLayer.Repositories;
 using ServiceLayer.Exceptions;
 using ServiceLayer.Helpers.Constants;
@@ -15,6 +15,7 @@ namespace ServiceLayer.Services
     public class TeacherService : ITeacherService
     {
         private readonly TeacherRepository _repo;
+       
 
         private int _count = 1;
 

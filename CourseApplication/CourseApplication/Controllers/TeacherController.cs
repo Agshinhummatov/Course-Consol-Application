@@ -1,4 +1,4 @@
-﻿using DomianLayer.Common;
+﻿using DomianLayer.Entities;
 using ServiceLayer.Helpers;
 using ServiceLayer.Services;
 using ServiceLayer.Services.Interfaces;

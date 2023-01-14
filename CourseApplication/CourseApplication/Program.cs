@@ -41,7 +41,7 @@ while (true)
                 teacherController.Update();
                 break;
             case 7:
-                groupController.GroupCreat();
+                groupController.Create();
                 break;
             default:
                 ConsoleColor.Red.WriteConsole("Please add correct option");

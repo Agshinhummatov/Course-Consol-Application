@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomianLayer.Common
+namespace DomianLayer.Entities
 {
     public class Group : BaseEntity
     {

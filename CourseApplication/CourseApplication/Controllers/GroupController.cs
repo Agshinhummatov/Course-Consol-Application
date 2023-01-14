@@ -1,88 +1,105 @@
-﻿using DomianLayer.Common;
+﻿using DomianLayer.Entities;
 using ServiceLayer.Helpers;
 using ServiceLayer.Services;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Group = DomianLayer.Common.Group;
+
 
 namespace CourseApplication.Controllers
 {
     public class GroupController
     {
+
         private readonly IGroupService _groupService;
         public GroupController()
         {
-            _groupService= new GroupService();
+            _groupService = new GroupService();
+            
         }
-        public void GroupCreat()
+
+        //string pattern = "^(?!\\s+$)['.-]+$";
+
+
+
+        public void Create()
         {
-           ConsoleColor.DarkGreen.WriteConsole("Please add group name :");
+            ConsoleColor.DarkCyan.WriteConsole("Please add group name");
            GroupName: string groupName = Console.ReadLine();
-
-            string pattern = @"^(?!\\s+$)[a-zA-Z,'. -]+$";
-
-
-            if (groupName == string.Empty)
+            try
             {
-                ConsoleColor.DarkGreen.WriteConsole("Please dont empty group name");
+                if (String.IsNullOrWhiteSpace(groupName))
+                {
+                    ConsoleColor.Red.WriteConsole("jkjkkj");
+                }
+                //else if (Regex.IsMatch(groupName, pattern))
+                //{
+                //    Console.WriteLine("hgj");
+                //    goto GroupName;
+                //}
+
+            }
+            catch (Exception ex)
+            {
+                ConsoleColor.Red.WriteConsole(ex.Message);
                 goto GroupName;
             }
-            else if (!Regex.IsMatch(groupName, pattern))
+
+            ConsoleColor.DarkCyan.WriteConsole("Please add group capacity");
+            Capacity: string capacityStr = Console.ReadLine();
+            int capacity;
+            bool isCorrectCapacity = int.TryParse(capacityStr, out capacity);
+            if (!isCorrectCapacity)
             {
-                ConsoleColor.Red.WriteConsole("Cannot be a symbol. Plase try again");
-                goto GroupName;
+                ConsoleColor.Red.WriteConsole("Plase, enter teacher id for group");
+                goto Capacity;
             }
-
-
-            //DateTime dateTime= DateTime.Now;
-
-
-            //bool dateTime = DateTime.TryParse(groupCapacitystr, out groupCapacity);
-
-            ConsoleColor.Red.WriteConsole("Please add group capacity ");
-            GroupCapacity: string groupCapacitystr = Console.ReadLine();
-
-            int groupCapacity;
-
-            bool isCorrectGroupCapacitystr = int.TryParse(groupCapacitystr, out groupCapacity);
-
-            if (isCorrectGroupCapacitystr)
+            ConsoleColor.DarkCyan.WriteConsole("Please add teacher id");
+            Id: string idStr = Console.ReadLine();
+            int id;
+            bool isCorrectId = int.TryParse(idStr, out id);
+            if (isCorrectId)
             {
 
                 try
                 {
-                    Group group = new Group
+                    DomianLayer.Entities.Group group = new DomianLayer.Entities.Group
                     {
-                        Name = groupName,
-                        Capacity = groupCapacity
 
+                        Name= groupName,
+                        Capacity= capacity,
+                        CreateDate =DateTime.Now
                     };
-
-                    var response = _groupService.Create(group);
-
-                    ConsoleColor.Green.WriteConsole($" Id: {response.Id} {response.Name} {response.Capacity}");
-
+                    _groupService.Create(group,id);
+                    ConsoleColor.Green.WriteConsole
+                    (
+                        $"id: {group.Id}, Name: {group.Name} Capacity : {group.Capacity}," +
+                        $" Creat data {group.CreateDate.ToString("yyyy, mm,dd")}," +
+                        $" Teacher:{group.Teacher.Id},{group.Teacher.Name} {group.Teacher.Surname}," +
+                        $"{group.Teacher.Age},{group.Teacher.Address}"
+                    );
 
                 }
                 catch (Exception ex)
                 {
-                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Plase try again");
-                    goto GroupName;
+
+                    ConsoleColor.Red.WriteConsole(ex.Message);
+                    goto Id;
                 }
 
-
             }
-            else
-            {
 
-                ConsoleColor.Red.WriteConsole("Please add correct format group capacity");
-                goto GroupCapacity;
-            }
+
+  
+
         }
+
+
     }
+
 }

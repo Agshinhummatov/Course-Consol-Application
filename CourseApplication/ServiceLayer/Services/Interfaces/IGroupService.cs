@@ -1,4 +1,4 @@
-﻿using DomianLayer.Common;
+﻿using DomianLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace ServiceLayer.Services.Interfaces
     public interface IGroupService
     {
 
-        Group Create(Group group);
+        Group Create(Group group,int teacherId);
 
         void Delete(int? id);
         Group GetGroupById(int id);

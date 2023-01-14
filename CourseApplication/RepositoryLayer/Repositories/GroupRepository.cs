@@ -1,4 +1,4 @@
-﻿using DomianLayer.Common;
+﻿using DomianLayer.Entities;
 using RepositoryLayer.Data;
 using RepositoryLayer.Repositories.Interfaces;
 using System;
@@ -25,7 +25,7 @@ namespace RepositoryLayer.Repositories
 
         public Group Get(Predicate<Group> predicate)
         {
-            throw new NotImplementedException();
+            return AppDbContext<Group>.datas.Find(predicate);
         }
 
         public List<Group> GetAll(Predicate<Group> predicate)
