@@ -28,7 +28,7 @@ namespace ServiceLayer.Services
             group.Id = _count;
             Teacher teacher =_teacher.Get(m=>m.Id == teacherId);
             group.Teacher = teacher;
-            if (teacher is null) throw new Exception(ResponseMessages.NotFound);
+            if (teacher is null) throw new Exception(ResponseMessages.NotFound); 
             _repo.Create(group);
             _count++;
             return group;
@@ -36,7 +36,13 @@ namespace ServiceLayer.Services
 
         public void Delete(int? id)
         {
-            throw new NotImplementedException();
+            if (id is null) throw new ArgumentNullException();
+
+            Group dbGroup = _repo.Get(m => m.Id == id);
+
+            if (dbGroup == null) throw new NullReferenceException("Data notfound");
+
+            _repo.Delete(dbGroup);
         }
 
         public Group GetGroupById(int id)

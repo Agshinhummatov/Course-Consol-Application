@@ -1,5 +1,6 @@
 ﻿using DomianLayer.Entities;
 using ServiceLayer.Helpers;
+using ServiceLayer.Helpers.Constants;
 using ServiceLayer.Services;
 using ServiceLayer.Services.Interfaces;
 using System;
@@ -23,8 +24,8 @@ namespace CourseApplication.Controllers
             
         }
 
-        //string pattern = "^(?!\\s+$)['.-]+$";
-
+        string pattern = "^(?!\\s+$)['.-]+$";
+        string msg =  "/Plase enter agin";
 
 
         public void Create()
@@ -35,13 +36,13 @@ namespace CourseApplication.Controllers
             {
                 if (String.IsNullOrWhiteSpace(groupName))
                 {
-                    ConsoleColor.Red.WriteConsole("jkjkkj");
+                    ConsoleColor.Red.WriteConsole(ResponseMessages.StringMessage + msg );
                 }
-                //else if (Regex.IsMatch(groupName, pattern))
-                //{
-                //    Console.WriteLine("hgj");
-                //    goto GroupName;
-                //}
+                else if (Regex.IsMatch(groupName, pattern))
+                {
+                    Console.WriteLine(ResponseMessages.StringCharacterMessage + msg);
+                    goto GroupName;
+                }
 
             }
             catch (Exception ex)
@@ -54,16 +55,24 @@ namespace CourseApplication.Controllers
             Capacity: string capacityStr = Console.ReadLine();
             int capacity;
             bool isCorrectCapacity = int.TryParse(capacityStr, out capacity);
-            if (!isCorrectCapacity)
+            if (!isCorrectCapacity && capacity < 0 )
             {
                 ConsoleColor.Red.WriteConsole("Plase, enter teacher id for group");
                 goto Capacity;
             }
+            else if(capacity >= 30 )
+            {
+                ConsoleColor.Red.WriteConsole("Can not be greater than 30");
+                goto Capacity;
+                
+            }
+
+            
             ConsoleColor.DarkCyan.WriteConsole("Please add teacher id");
             Id: string idStr = Console.ReadLine();
             int id;
             bool isCorrectId = int.TryParse(idStr, out id);
-            if (isCorrectId)
+            if (isCorrectId || id < 0)
             {
 
                 try
