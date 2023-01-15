@@ -165,7 +165,7 @@ namespace CourseApplication.Controllers
                     foreach (var item in group)
                     {
 
-                        ConsoleColor.Green.WriteConsole($" Id: {item.Id},Name : {item.Id},Capacity : {item.Capacity} ");
+                        ConsoleColor.Green.WriteConsole($" Id: {item.Id},Name : {item.Name},Capacity : {item.Capacity} ");
                     }
                     
                 }
@@ -306,6 +306,34 @@ namespace CourseApplication.Controllers
 
         public void GetGroupById()
         {
+            ConsoleColor.DarkCyan.WriteConsole("Please add serach geoup id:");
+            GroupId: string groupId = Console.ReadLine();
+
+            int id;
+            bool isCorrectId = int.TryParse(groupId, out id);
+
+            if (isCorrectId)
+            {
+                try
+                {
+                    var response = _groupService.GetGroupById(id);
+
+
+                    ConsoleColor.Green.WriteConsole($"Id: {response.Id}, Name: {response.Name},{response.Capacity}");
+
+                }
+                catch (Exception ex)
+                {
+                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add group id again");
+                    goto GroupId;
+                }
+
+            }
+            else
+            {
+                ConsoleColor.Red.WriteConsole("Please add correct format group id");
+                goto GroupId;
+            }
 
         }
 
