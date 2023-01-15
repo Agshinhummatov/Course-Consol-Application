@@ -50,7 +50,7 @@ namespace ServiceLayer.Services
             return _repo.GetAll();
         }
 
-        public Teacher GetById(int id)
+        public Teacher GetById(int? id)
         {
             Teacher teacher = _repo.Get(m => m.Id == id);
             return teacher;
@@ -65,7 +65,7 @@ namespace ServiceLayer.Services
             return teachers;
         }
 
-        public Teacher Update(int id, Teacher teacher)
+        public Teacher Update(int? id, Teacher teacher)
         {
             if (id == null) throw new ArgumentNullException();
             if (teacher == null) throw new ArgumentNullException();

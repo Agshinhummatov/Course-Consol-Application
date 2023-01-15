@@ -21,7 +21,7 @@ namespace ServiceLayer.Services
 
         
 
-        public Group Create(Group group, int teacherId)
+        public Group Create(Group group, int? teacherId)
         {
             group.Id = _count;
             Teacher teacher = _teacher.Get(m => m.Id == teacherId);
@@ -40,7 +40,7 @@ namespace ServiceLayer.Services
             _repo.Delete(dbGroup);
         }
 
-        public Group GetGroupById(int id)
+        public Group GetGroupById(int? id)
         {
             Group group = _repo.Get(m => m.Id == id);
             return group;
@@ -54,7 +54,7 @@ namespace ServiceLayer.Services
             return dbGroups;
         }
 
-        public List<Group> GetGroupsByTeacherId(int teacherId)
+        public List<Group> GetGroupsByTeacherId(int? teacherId)
         {
             if (teacherId == null) throw new NotFoundException(ResponseMessages.NotFound);
             List<Group> dbGroup = _repo.GetAll(m => m.Teacher.Id == teacherId);
@@ -65,8 +65,8 @@ namespace ServiceLayer.Services
         public List<Group> GetGroupsByTeacherName(string teacherName)
         {
             if (teacherName is null) throw new NotFoundException(ResponseMessages.NotFound);
-            List<Group> dbGroups = _repo.GetAll(m => m.Teacher.Name == teacherName);
-            List<Group> dbGroup = _repo.GetAll(m => m.Name.Trim().ToLower().Contains(teacherName.Trim().ToLower()));
+            List<Group> dbGroups = _repo.GetAll(m => m.Teacher.Name.Trim().ToLower() == teacherName.Trim().ToLower());
+            //List<Group> dbGroup = _repo.GetAll(m => m.Name.Trim().ToLower().Contains(teacherName.Trim().ToLower()));
             if (dbGroups.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
             return dbGroups;
         }
@@ -78,13 +78,13 @@ namespace ServiceLayer.Services
 
         public List<Group> Search(string searchText)
         {
-            List<Group> group = _repo.GetAll(m => m.Name.ToLower().Contains(searchText.ToLower()));
+            List<Group> group = _repo.GetAll(m => m.Name.Trim().ToLower().Contains(searchText.Trim().ToLower()));
             //List<Group> group = _repo.GetAll(m => m.Name.Trim().ToLower().Contains(searchText.Trim().ToLower()));
             if (group.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
             return group;
         }
 
-        public Group Update(int id, Group group)
+        public Group Update(int? id, Group group)
         {
             throw new NotImplementedException();
         }

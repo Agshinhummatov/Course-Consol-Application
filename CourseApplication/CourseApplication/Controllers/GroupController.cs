@@ -69,9 +69,14 @@ namespace CourseApplication.Controllers
 
 
             ConsoleColor.DarkCyan.WriteConsole("Please add teacher id");
-            Id: string idStr = Console.ReadLine();
+            GroupIdStr : string idStr = Console.ReadLine();
             int id;
             bool isCorrectId = int.TryParse(idStr, out id);
+
+            if(idStr == string.Empty)
+            {
+                ConsoleColor.Red.WriteConsole("Plase, enter correct id");
+            }
             if (isCorrectId || id < 0)
             {
 
@@ -98,10 +103,16 @@ namespace CourseApplication.Controllers
                 {
 
                     ConsoleColor.Red.WriteConsole(ex.Message);
-                    goto Id;
+                    goto GroupName;
                 }
 
 
+
+            }
+            else
+            {
+                ConsoleColor.Red.WriteConsole("Plase, enter format id" + msg);
+                goto GroupIdStr;
 
             }
 
