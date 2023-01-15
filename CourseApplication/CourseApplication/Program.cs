@@ -43,6 +43,24 @@ while (true)
             case 7:
                 groupController.Create();
                 break;
+            case 8:
+                groupController.GetGroupsByCapity();
+                break;
+            case 9:
+                groupController.Delete();
+                break;
+            case 10:
+                groupController.GetGroupsCount();
+                break;
+            case 11:
+                groupController.GetGroupsByTeacherId();
+                break;
+            case 12:
+                groupController.GetAllGroupsByTeacherName();
+                break;
+            case 13:
+                groupController.SearchByName();
+                break;
             default:
                 ConsoleColor.Red.WriteConsole("Please add correct option");
                 goto Option;
@@ -61,5 +79,5 @@ while (true)
 static void GetOptions()
 {
     ConsoleColor.Cyan.WriteConsole("Please select one option :");
-    ConsoleColor.Cyan.WriteConsole("Teacher options : \n 1 - Create Teacher, \n 2 - Get all teachers, \n 3 - Delete Teacher, \n 4 - Search teacher,\n 5 - Get teacher by id, \n 6 - Update \n 7 Create group ");
+    ConsoleColor.Cyan.WriteConsole("Teacher options : \n 1 - Create Teacher, \n 2 - Get all teachers, \n 3 - Delete Teacher, \n 4 - Search teacher,\n 5 - Get teacher by id, \n 6 - Update  \n Options \n 7 Create group, \n 8 Get groups by capity  \n 9 Group Delete  \n 10 Groups count   \n 11  Groups by teacher id   \n  12 - Get all groups by teacher name  \n 13- Search by Name \n 14");
 }

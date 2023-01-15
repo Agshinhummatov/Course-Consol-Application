@@ -137,7 +137,7 @@ namespace CourseApplication.Controllers
         public void Delete()
         {
             ConsoleColor.DarkCyan.WriteConsole("Please add teacher id for delete:");
-          TeacherId : string teacherId = Console.ReadLine();
+           TeacherId : string teacherId = Console.ReadLine();
 
             int id;
 
@@ -331,7 +331,7 @@ namespace CourseApplication.Controllers
 
         }
 
-
+        
 
     }
 }

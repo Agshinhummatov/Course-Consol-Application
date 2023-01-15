@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomianLayer.Entities
+namespace DomianLayer.Common
 {
     public abstract  class BaseEntity
     {

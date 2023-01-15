@@ -1,13 +1,9 @@
 ﻿using DomianLayer.Entities;
 using RepositoryLayer.Repositories;
+using ServiceLayer.Exceptions;
 using ServiceLayer.Helpers.Constants;
 using ServiceLayer.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
+using Group = DomianLayer.Entities.Group;
 
 namespace ServiceLayer.Services
 {
@@ -23,12 +19,14 @@ namespace ServiceLayer.Services
 
         private int _count = 1;
 
+        
+
         public Group Create(Group group, int teacherId)
         {
             group.Id = _count;
-            Teacher teacher =_teacher.Get(m=>m.Id == teacherId);
+            Teacher teacher = _teacher.Get(m => m.Id == teacherId);
             group.Teacher = teacher;
-            if (teacher is null) throw new Exception(ResponseMessages.NotFound); 
+            if (teacher is null) throw new Exception(ResponseMessages.NotFound);
             _repo.Create(group);
             _count++;
             return group;
@@ -36,48 +34,59 @@ namespace ServiceLayer.Services
 
         public void Delete(int? id)
         {
-            if (id is null) throw new ArgumentNullException();
-
+            if (id is null) throw new NotFoundException(ResponseMessages.NotFound);
             Group dbGroup = _repo.Get(m => m.Id == id);
-
-            if (dbGroup == null) throw new NullReferenceException("Data notfound");
-
+            if (dbGroup == null) throw new NotFoundException(ResponseMessages.NotFound);
             _repo.Delete(dbGroup);
         }
 
         public Group GetGroupById(int id)
         {
-            throw new NotImplementedException();
+            Group group = _repo.Get(m => m.Id == id);
+            return group;
         }
 
-        public List<Group> GetGroupsByCapity(int Id)
+        public List<Group> GetGroupsByCapity(int? capacity)
         {
-            throw new NotImplementedException();
+            if (capacity == null) throw new NotFoundException(ResponseMessages.NotFound);
+            List<Group> dbGroups = _repo.GetAll(m => m.Capacity == capacity);
+            if (dbGroups is null) throw new NotFoundException(ResponseMessages.NotFound);
+            return dbGroups;
         }
 
-        public List<Group> GetGroupsByTeacherId(int Id)
+        public List<Group> GetGroupsByTeacherId(int teacherId)
         {
-            throw new NotImplementedException();
+            if (teacherId == null) throw new NotFoundException(ResponseMessages.NotFound);
+            List<Group> dbGroup = _repo.GetAll(m => m.Teacher.Id == teacherId);
+            if (dbGroup.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
+            return dbGroup;
         }
 
-        public List<Group> GetGroupsByTeacherName(string name)
+        public List<Group> GetGroupsByTeacherName(string teacherName)
         {
-            throw new NotImplementedException();
+            if (teacherName is null) throw new NotFoundException(ResponseMessages.NotFound);
+            List<Group> dbGroups = _repo.GetAll(m => m.Teacher.Name == teacherName);
+            List<Group> dbGroup = _repo.GetAll(m => m.Name.Trim().ToLower().Contains(teacherName.Trim().ToLower()));
+            if (dbGroups.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
+            return dbGroups;
         }
 
-        public List<Group> GetGroupsCount()
+        public int GetGroupsCount()
         {
-            throw new NotImplementedException();
+            return _repo.GetAll().Count;
         }
 
         public List<Group> Search(string searchText)
         {
-            throw new NotImplementedException();
+            List<Group> group = _repo.GetAll(m => m.Name.Trim().ToLower().Contains(searchText.Trim().ToLower()));
+            if (group.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
+            return group;
         }
 
         public Group Update(int id, Group group)
         {
             throw new NotImplementedException();
         }
+
     }
 }
