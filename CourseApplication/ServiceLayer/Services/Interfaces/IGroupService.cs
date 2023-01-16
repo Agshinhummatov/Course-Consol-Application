@@ -14,11 +14,11 @@ namespace ServiceLayer.Services.Interfaces
 
         void Delete(int? id);
         Group GetGroupById(int? id);
-        List<Group> SearchByName(string searchText);
+        List<Group>  SearchGroupByName(string searchText);
 
         Group Update(int? id, Group group);
 
-        List<Group> GetGroupsByCapity(int? Id);
+        List<Group> GetGroupsByCapcity(int? Id);
         List<Group> GetGroupsByTeacherName(string name);
 
         List<Group> GetGroupsByTeacherId(int? teacherId);

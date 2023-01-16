@@ -26,17 +26,22 @@ namespace CourseApplication.Controllers
 
         string pattern = "^(?!\\s+$)['.-]+$";
         string msg = "/Plase enter agin";
-
+        //string pattren2 = @"^\w+$@";
 
         public void Create()
         {
-            ConsoleColor.DarkCyan.WriteConsole("Please add group name");       //Namede go to etmir
+            ConsoleColor.DarkCyan.WriteConsole("Please add group name");       
             GroupName: string groupName = Console.ReadLine();
             if (groupName == string.Empty)
             {
                 ConsoleColor.Red.WriteConsole("Please dont empty group name");
                 goto GroupName;
             }
+            //else if (!Regex.IsMatch(groupName, pattren2))
+            //{
+            //    ConsoleColor.Red.WriteConsole("Cannot be a symbol. Plase try again");
+            //    goto GroupName;
+            //}
 
             ConsoleColor.DarkCyan.WriteConsole("Please add group capacity");
             Capacity: string capacityStr = Console.ReadLine();
@@ -149,7 +154,7 @@ namespace CourseApplication.Controllers
 
 
 
-        public void GetGroupsByCapity()
+        public void GetGroupsByCapcity()// adi deyis
         {
 
             ConsoleColor.DarkCyan.WriteConsole("Please add group capacity");
@@ -161,7 +166,7 @@ namespace CourseApplication.Controllers
 
                 try
                 {
-                    var group = _groupService.GetGroupsByCapity(capacity);
+                    var group = _groupService.GetGroupsByCapcity(capacity);
 
                     foreach (var item in group)
                     {
@@ -199,6 +204,12 @@ namespace CourseApplication.Controllers
 
             ConsoleColor.DarkCyan.WriteConsole("Please add teacher id");
             Id: string teacherIdStr = Console.ReadLine();
+
+            if (teacherIdStr == string.Empty)
+            {
+                ConsoleColor.Red.WriteConsole("Plase, dont empty teacher id ");
+                goto Id;
+            }
             int id;
             bool isCorrectId = int.TryParse(teacherIdStr, out id);
             if (isCorrectId && id > 0)
@@ -229,6 +240,11 @@ namespace CourseApplication.Controllers
                     goto Id;
                 }
             }
+            else
+            {
+                ConsoleColor.Red.WriteConsole("Plase correct format id");
+                goto Id;
+            }
         }
 
         public void GetAllGroupsByTeacherName()                            
@@ -239,7 +255,8 @@ namespace CourseApplication.Controllers
 
             if (teacherName == string.Empty)
             {
-                ConsoleColor.Red.WriteConsole("Plase, add correct format teacher name");
+                ConsoleColor.Red.WriteConsole("Not found");
+                goto SearhcName;
             }
             else
             {
@@ -248,7 +265,7 @@ namespace CourseApplication.Controllers
                 try
                 {
 
-                    var groups = _groupService.GetGroupsByTeacherName(teacherName);            // getallgropsbyteachername elemelisen
+                    var groups = _groupService.GetGroupsByTeacherName(teacherName);            
 
                     foreach (var group in groups)
                     {
@@ -277,7 +294,7 @@ namespace CourseApplication.Controllers
 
 
 
-        public void SearchByName()                                          //Searchin adini servide deyis
+        public void SearchGroupByName()                                          
         {
             ConsoleColor.DarkCyan.WriteConsole("Please add search text:");
          SearchText: string searchText = Console.ReadLine().Trim(); 
@@ -290,7 +307,7 @@ namespace CourseApplication.Controllers
 
             try
             {
-                var response = _groupService.SearchByName(searchText);
+                var response = _groupService.SearchGroupByName(searchText);
                 foreach (var group in response)
                 {
                     ConsoleColor.Green.WriteConsole

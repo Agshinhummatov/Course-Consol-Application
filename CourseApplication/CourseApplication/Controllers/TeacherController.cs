@@ -20,7 +20,7 @@ namespace CourseApplication.Controllers
             ConsoleColor.DarkGreen.WriteConsole("Please add teacher name :");
         TeacherName: string teacherName = Console.ReadLine().Trim();
 
-            string pattern = /*@"^(?!\\s+$)[a-zA-Z,'. -]+$"*/ @"^[a-zA-z]+$";
+            string pattern =  @"^[a-zA-z]+$";
 
 
             if (teacherName == string.Empty)
@@ -49,7 +49,7 @@ namespace CourseApplication.Controllers
             }
 
             ConsoleColor.DarkGreen.WriteConsole("Please add teacher adress ");
-        TeacherAddress: string teacherAddress = Console.ReadLine();
+            TeacherAddress: string teacherAddress = Console.ReadLine();
 
             if (teacherAddress == string.Empty)
             {
@@ -59,9 +59,9 @@ namespace CourseApplication.Controllers
 
 
             ConsoleColor.DarkGreen.WriteConsole("Please add teacher age ");
-        TeacherAge: string teacherAgestr = Console.ReadLine();
+            TeacherAge: string teacherAgestr = Console.ReadLine();
 
-            if (teacherAddress == string.Empty)
+            if (teacherAgestr == string.Empty)
             {
                 ConsoleColor.Red.WriteConsole("Please dont empty teacher age");
                 goto TeacherAge;
@@ -166,7 +166,7 @@ namespace CourseApplication.Controllers
         }
 
 
-        public void SerachTeacher()
+        public void SerachTeacher()  
         {
             ConsoleColor.DarkCyan.WriteConsole("Please add search text:");
         SearchText: string searchText = Console.ReadLine();
