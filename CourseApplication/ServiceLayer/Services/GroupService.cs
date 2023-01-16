@@ -76,10 +76,11 @@ namespace ServiceLayer.Services
             return _repo.GetAll().Count;
         }
 
-        public List<Group> Search(string searchText)
+        public List<Group> SearchByName(string searchText)
         {
-            List<Group> group = _repo.GetAll(m => m.Name.Trim().ToLower().Contains(searchText.Trim().ToLower()));
             //List<Group> group = _repo.GetAll(m => m.Name.Trim().ToLower().Contains(searchText.Trim().ToLower()));
+            //List<Group> group = _repo.GetAll(m => m.Name.Trim().ToLower().Contains(searchText.Trim().ToLower()));
+            List<Group> group = _repo.GetAll(m => m.Name.ToLower().Contains(searchText.ToLower()));
             if (group.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
             return group;
         }

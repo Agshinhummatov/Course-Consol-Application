@@ -32,22 +32,9 @@ namespace CourseApplication.Controllers
         {
             ConsoleColor.DarkCyan.WriteConsole("Please add group name");       //Namede go to etmir
             GroupName: string groupName = Console.ReadLine();
-            try
+            if (groupName == string.Empty)
             {
-                if (String.IsNullOrWhiteSpace(groupName))
-                {
-                    ConsoleColor.Red.WriteConsole(ResponseMessages.StringMessage + msg);
-                }
-                else if (Regex.IsMatch(groupName, pattern))
-                {
-                    Console.WriteLine(ResponseMessages.StringCharacterMessage + msg);
-                    goto GroupName;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                ConsoleColor.Red.WriteConsole(ex.Message);
+                ConsoleColor.Red.WriteConsole("Please dont empty group name");
                 goto GroupName;
             }
 
@@ -55,19 +42,22 @@ namespace CourseApplication.Controllers
             Capacity: string capacityStr = Console.ReadLine();
             int capacity;
             bool isCorrectCapacity = int.TryParse(capacityStr, out capacity);
-            if (!isCorrectCapacity && capacity < 0)
+            if(capacityStr == string.Empty)
             {
-                ConsoleColor.Red.WriteConsole("Plase, enter teacher id for group");
+                ConsoleColor.Red.WriteConsole("Please dont empty group capacity");
                 goto Capacity;
             }
-            else if (capacity >= 30)
+            if (!isCorrectCapacity || capacity < 0)
             {
-                ConsoleColor.Red.WriteConsole("Can not be greater than 30");
+                ConsoleColor.Red.WriteConsole("Plase, enter correct capacity for group");      
+                goto Capacity;
+            }
+            else if (capacity >= 30 )
+            {
+                ConsoleColor.Red.WriteConsole("Can not be greater than 30 ");
                 goto Capacity;
 
             }
-
-
             ConsoleColor.DarkCyan.WriteConsole("Please add teacher id");
             GroupIdStr : string idStr = Console.ReadLine();
             int id;
@@ -77,7 +67,7 @@ namespace CourseApplication.Controllers
             {
                 ConsoleColor.Red.WriteConsole("Plase, enter correct id");
             }
-            if (isCorrectId || id < 0)
+            if (isCorrectId && id > 0)
             {
 
                 try
@@ -103,7 +93,7 @@ namespace CourseApplication.Controllers
                 {
 
                     ConsoleColor.Red.WriteConsole(ex.Message);
-                    goto GroupName;
+                    goto GroupIdStr;
                 }
 
 
@@ -236,7 +226,7 @@ namespace CourseApplication.Controllers
             }
         }
 
-        public void GetAllGroupsByTeacherName()                             // adi kicik ile olani tapmir
+        public void GetAllGroupsByTeacherName()                            
         {
 
             ConsoleColor.DarkCyan.WriteConsole("Please add groups teacher name:");
@@ -295,7 +285,7 @@ namespace CourseApplication.Controllers
 
             try
             {
-                var response = _groupService.Search(searchText);
+                var response = _groupService.SearchByName(searchText);
                 foreach (var group in response)
                 {
                     ConsoleColor.Green.WriteConsole

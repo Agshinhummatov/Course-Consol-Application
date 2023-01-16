@@ -14,7 +14,7 @@ namespace ServiceLayer.Services.Interfaces
 
         void Delete(int? id);
         Group GetGroupById(int? id);
-        List<Group> Search(string searchText);
+        List<Group> SearchByName(string searchText);
 
         Group Update(int? id, Group group);
 

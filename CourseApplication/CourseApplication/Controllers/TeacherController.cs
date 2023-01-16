@@ -25,12 +25,12 @@ namespace CourseApplication.Controllers
             ConsoleColor.DarkGreen.WriteConsole("Please add teacher name :");
             TeacherName: string teacherName = Console.ReadLine();
 
-            string pattern = @"^(?!\\s+$)[a-zA-Z,'. -]+$";
+            string pattern = /*@"^(?!\\s+$)[a-zA-Z,'. -]+$"*/ @"^[a-zA-z]+$";
 
 
             if (teacherName == string.Empty)
             {
-                ConsoleColor.DarkGreen.WriteConsole("Please dont empty teacher name");
+                ConsoleColor.Red.WriteConsole("Please dont empty teacher name");
                 goto TeacherName;
             }
             else if (!Regex.IsMatch(teacherName, pattern))
@@ -44,7 +44,7 @@ namespace CourseApplication.Controllers
 
             if (teacherSurname == string.Empty)
             {
-                ConsoleColor.DarkGreen.WriteConsole("Please dont empty teacher surname");
+                ConsoleColor.Red.WriteConsole("Please dont empty teacher surname");
                 goto TeacherSurname;
             }
             else if (!Regex.IsMatch(teacherSurname, pattern))
@@ -63,14 +63,14 @@ namespace CourseApplication.Controllers
             }
 
 
-            ConsoleColor.Red.WriteConsole("Please add teacher age ");
+            ConsoleColor.DarkGreen.WriteConsole("Please add teacher age ");
             TeacherAge : string teacherAgestr = Console.ReadLine();
 
             int teacherAge;
 
             bool isCorrectTeacherAge = int.TryParse(teacherAgestr, out teacherAge);
 
-            if (isCorrectTeacherAge)
+            if (isCorrectTeacherAge && teacherAge > 0)
             {
 
                 try
