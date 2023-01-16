@@ -50,7 +50,7 @@ namespace ServiceLayer.Services
         {
             if (capacity == null) throw new NotFoundException(ResponseMessages.NotFound);
             List<Group> dbGroups = _repo.GetAll(m => m.Capacity == capacity);
-            if (dbGroups is null) throw new NotFoundException(ResponseMessages.NotFound);
+            if (dbGroups.Count == 0) throw new NotFoundException(ResponseMessages.NotFound);
             return dbGroups;
         }
 

@@ -47,7 +47,7 @@ namespace CourseApplication.Controllers
                 ConsoleColor.Red.WriteConsole("Please dont empty group capacity");
                 goto Capacity;
             }
-            if (!isCorrectCapacity || capacity < 0)
+            if (!isCorrectCapacity || capacity < 1)
             {
                 ConsoleColor.Red.WriteConsole("Plase, enter correct capacity for group");      
                 goto Capacity;
@@ -65,7 +65,7 @@ namespace CourseApplication.Controllers
 
             if(idStr == string.Empty)
             {
-                ConsoleColor.Red.WriteConsole("Plase, enter correct id");
+                ConsoleColor.Red.WriteConsole("Please dont empty group id");
             }
             if (isCorrectId && id > 0)
             {
@@ -82,10 +82,10 @@ namespace CourseApplication.Controllers
                     _groupService.Create(group, id);
                     ConsoleColor.Green.WriteConsole
                     (
-                        $"id: {group.Id}, Name: {group.Name} Capacity : {group.Capacity}," +
+                        $"Group Id: {group.Id}, Group name: {group.Name} Group capacity: {group.Capacity}," +
                         $" Creat data {group.CreateDate.ToString("yyyy,MM,dd")}," +
-                        $" Teacher:{group.Teacher.Id},{group.Teacher.Name} {group.Teacher.Surname}," +
-                        $"{group.Teacher.Age},{group.Teacher.Address}"
+                        $" Teacher id: {group.Teacher.Id}, Teacher name: {group.Teacher.Name}  Teacher surname: {group.Teacher.Surname}," +
+                        $" Teacher age : {group.Teacher.Age}, Teacher Address: {group.Teacher.Address}"
                     );
 
                 }
@@ -156,7 +156,7 @@ namespace CourseApplication.Controllers
             Capacity: string capacityStr = Console.ReadLine();
             int capacity;
             bool isCorrectCapacity = int.TryParse(capacityStr, out capacity);
-            if (isCorrectCapacity)
+            if (isCorrectCapacity && capacity > 0 && capacity < 30 )
             {
 
                 try
@@ -166,16 +166,21 @@ namespace CourseApplication.Controllers
                     foreach (var item in group)
                     {
 
-                        ConsoleColor.Green.WriteConsole($" Id: {item.Id},Name : {item.Name},Capacity : {item.Capacity} ");
+                        ConsoleColor.Green.WriteConsole($" Id: {item.Id}, Name : {item.Name}, Capacity : {item.Capacity} ");
                     }
                     
                 }
                 catch (Exception ex)
                 {
-                    ConsoleColor.Red.WriteConsole(ex.Message);
+                    ConsoleColor.Red.WriteConsole(ex.Message + "/" + "Please add different capacity");
                     goto Capacity;
                 }
 
+            }
+            else 
+            {
+                ConsoleColor.Red.WriteConsole("Plase correct format  capacity");
+                goto Capacity;
             }
 
 
@@ -275,7 +280,7 @@ namespace CourseApplication.Controllers
         public void SearchByName()                                          //Searchin adini servide deyis
         {
             ConsoleColor.DarkCyan.WriteConsole("Please add search text:");
-             SearchText: string searchText = Console.ReadLine();
+         SearchText: string searchText = Console.ReadLine().Trim(); 
 
             if (searchText == string.Empty)
             {
@@ -309,7 +314,11 @@ namespace CourseApplication.Controllers
         {
             ConsoleColor.DarkCyan.WriteConsole("Please add serach geoup id:");
             GroupId: string groupId = Console.ReadLine();
-
+            if (groupId == string.Empty)
+            {
+                ConsoleColor.Red.WriteConsole("Please dont empty group id");
+                goto GroupId;
+            }
             int id;
             bool isCorrectId = int.TryParse(groupId, out id);
 
