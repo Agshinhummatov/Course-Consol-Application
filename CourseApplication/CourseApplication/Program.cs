@@ -22,46 +22,48 @@ while (true)
     {
         switch (selectOption)
         {
-            case 1:/*(int)Options.CreateTecher:*/
+            
+               case (int)Options.CreateTecher:
                 teacherController.Create();
                 break;
-            case 2:
+            case
+                (int)Options.GetAllTeachers:
                 teacherController.GetAll(); 
                 break;
-            case 3:
+            case (int)Options.DeleteTeacher:
                 teacherController.Delete();
                 break;
-            case 4:
+            case (int)Options.SearchForTeacherNameAnSurname:
                 teacherController.SerachTeacher();
                 break;
-            case 5:
+            case (int)Options.GetTeacherById:
                 teacherController.GetById();
                 break;
-            case 6:
+            case (int)Options.UpDateTeacher:
                 teacherController.Update();
                 break;
-            case 7:
+            case (int)Options.CreateGroup:
                 groupController.Create();
                 break;
-            case 8:
-                groupController.GetGroupsByCapity();
+            case (int)Options.GetGroupsByCapacity:
+                groupController.GetGroupsByCapacity();
                 break;
-            case 9:
+            case (int)Options.DeleteGroup:
                 groupController.Delete();
                 break;
-            case 10:
+            case (int)Options.GetAllGroupsCount:
                 groupController.GetGroupsCount();
                 break;
-            case 11:
+            case (int)Options.GetGroupsByTeacherId:
                 groupController.GetGroupsByTeacherId();
                 break;
-            case 12:
+            case (int)Options.GetAllGroupsByTeacherName:
                 groupController.GetAllGroupsByTeacherName();
                 break;
-            case 13:
+            case (int)Options.SearchGroupByName:
                 groupController.SearchGroupByName();
                 break;
-            case 14:
+            case (int)Options.GetGroupById:
                 groupController.GetGroupById();
                 break;
             default:
@@ -82,5 +84,5 @@ while (true)
 static void GetOptions()
 {
     ConsoleColor.Cyan.WriteConsole("Please select one option :");
-    ConsoleColor.Cyan.WriteConsole("Teacher options : \n 1 - Create Teacher, \n 2 - Get all teachers, \n 3 - Delete Teacher, \n 4 - Search teacher,\n 5 - Get teacher by id, \n 6 - Update  \n Options \n 7 Create group, \n 8 Get groups by capity  \n 9 Group Delete  \n 10 Groups count   \n 11  Groups by teacher id   \n  12 - Get all groups by teacher name  \n 13-  Search group by name \n 14 Get group by id");
+    ConsoleColor.Cyan.WriteConsole("Teacher options : \n 1 - Create Teacher, \n 2 - Get all teachers, \n 3 - Delete Teacher, \n 4 - Search teacher,\n 5 - Get teacher by id, \n 6 - Update teacher \n Groups Options \n 7 - Create group, \n 8 - Get groups by capity  \n 9 - Group Delete  \n 10 - Groups count   \n 11 - Groups by teacher id   \n 12 - Get all groups by teacher name  \n 13 - Search group by name \n 14 - Get group by id \n 15 - Update group");
 }

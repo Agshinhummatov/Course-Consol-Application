@@ -24,9 +24,9 @@ namespace CourseApplication.Controllers
 
         }
 
-        string pattern = "^(?!\\s+$)['.-]+$";
+        string pattern = @"^[a-zA-Z]+$";
         string msg = "/Plase enter agin";
-        //string pattren2 = @"^\w+$@";
+        string pattren2 = @"^\w+$";
 
         public void Create()
         {
@@ -37,11 +37,11 @@ namespace CourseApplication.Controllers
                 ConsoleColor.Red.WriteConsole("Please dont empty group name");
                 goto GroupName;
             }
-            //else if (!Regex.IsMatch(groupName, pattren2))
-            //{
-            //    ConsoleColor.Red.WriteConsole("Cannot be a symbol. Plase try again");
-            //    goto GroupName;
-            //}
+            else if (!Regex.IsMatch(groupName, pattren2))
+            {
+                ConsoleColor.Red.WriteConsole("Cannot be a symbol. Plase try again");
+                goto GroupName;
+            }
 
             ConsoleColor.DarkCyan.WriteConsole("Please add group capacity");
             Capacity: string capacityStr = Console.ReadLine();
@@ -65,13 +65,12 @@ namespace CourseApplication.Controllers
             }
             ConsoleColor.DarkCyan.WriteConsole("Please add teacher id");
             GroupIdStr : string idStr = Console.ReadLine();
+
+
             int id;
             bool isCorrectId = int.TryParse(idStr, out id);
 
-            if(idStr == string.Empty)
-            {
-                ConsoleColor.Red.WriteConsole("Please dont empty group id");
-            }
+           
             if (isCorrectId && id > 0)
             {
 
@@ -154,11 +153,17 @@ namespace CourseApplication.Controllers
 
 
 
-        public void GetGroupsByCapcity()// adi deyis
+        public void GetGroupsByCapacity()
         {
 
             ConsoleColor.DarkCyan.WriteConsole("Please add group capacity");
             Capacity: string capacityStr = Console.ReadLine();
+
+            if (capacityStr == string.Empty)
+            {
+                ConsoleColor.Red.WriteConsole("Plase, dont empty capacity");
+                goto Capacity;
+            }
             int capacity;
             bool isCorrectCapacity = int.TryParse(capacityStr, out capacity);
             if (isCorrectCapacity && capacity > 0 && capacity < 30 )
@@ -166,7 +171,7 @@ namespace CourseApplication.Controllers
 
                 try
                 {
-                    var group = _groupService.GetGroupsByCapcity(capacity);
+                    var group = _groupService.GetGroupsByCapacity(capacity);
 
                     foreach (var item in group)
                     {
@@ -224,10 +229,10 @@ namespace CourseApplication.Controllers
                     {
                         ConsoleColor.Green.WriteConsole
                          (
-                         $"id: {group.Id}, Name: {group.Name} Capacity : {group.Capacity}," +
-                         $" Creat data {group.CreateDate.ToString("yyyy,MM,dd")}," +
-                         $" Teacher:{group.Teacher.Id},{group.Teacher.Name} {group.Teacher.Surname}," +
-                         $"{group.Teacher.Age},{group.Teacher.Address}"
+                           $"Group Id: {group.Id}, Group name: {group.Name} Group capacity: {group.Capacity}," +
+                           $" Creat data {group.CreateDate.ToString("yyyy,MM,dd")}," +
+                           $" Teacher id: {group.Teacher.Id}, Teacher name: {group.Teacher.Name}  Teacher surname: {group.Teacher.Surname}," +
+                           $" Teacher age : {group.Teacher.Age}, Teacher Address: {group.Teacher.Address}"
                          );
                     }
 
@@ -248,17 +253,24 @@ namespace CourseApplication.Controllers
         }
 
         public void GetAllGroupsByTeacherName()                            
-        {
+        {  
+            
 
             ConsoleColor.DarkCyan.WriteConsole("Please add groups teacher name:");
-            SearhcName : string teacherName = Console.ReadLine();
+            TeacherName: string teacherName = Console.ReadLine().Trim();
 
             if (teacherName == string.Empty)
             {
-                ConsoleColor.Red.WriteConsole("Not found");
-                goto SearhcName;
+                ConsoleColor.Red.WriteConsole("Plase dont empty teacher name");
+                goto TeacherName;
             }
-            else
+            else if (!Regex.IsMatch(teacherName, pattern))
+            {
+                ConsoleColor.Red.WriteConsole("Cannot be a symbol. Plase try again");
+                goto TeacherName;
+            }
+
+            
             {
 
 
@@ -273,8 +285,8 @@ namespace CourseApplication.Controllers
                          (
                          $"id: {group.Id}, Name: {group.Name} Capacity : {group.Capacity}," +
                          $" Creat data {group.CreateDate.ToString("yyyy,MM,dd")}," +
-                         $" Teacher:{group.Teacher.Id},{group.Teacher.Name} {group.Teacher.Surname}," +
-                         $"{group.Teacher.Age},{group.Teacher.Address}"
+                         $" Teacher id:{group.Teacher.Id}, Teacher name : {group.Teacher.Name}, Teacher surname: {group.Teacher.Surname}," +
+                         $" Teacher age : {group.Teacher.Age}, Teacher Address {group.Teacher.Address}"
                          );
                     }
 
@@ -284,7 +296,7 @@ namespace CourseApplication.Controllers
                 {
 
                     ConsoleColor.Red.WriteConsole(ex.Message);
-                    goto SearhcName;
+                    goto TeacherName;
                 }
 
             }
@@ -313,9 +325,9 @@ namespace CourseApplication.Controllers
                     ConsoleColor.Green.WriteConsole
                           (
                           $"id: {group.Id}, Name: {group.Name} Capacity : {group.Capacity}," +
-                          $" Creat data {group.CreateDate.ToString("yyyy,MM,dd")}," +
-                          $" Teacher:{group.Teacher.Id},{group.Teacher.Name} {group.Teacher.Surname}," +
-                          $"{group.Teacher.Age},{group.Teacher.Address}"
+                          $" Creat data:{group.CreateDate.ToString("yyyy,MM,dd")}," +
+                          $" Teacher:{group.Teacher.Id}, Teacher name {group.Teacher.Name}, Teacher surname : {group.Teacher.Surname}," +
+                          $" Teacher age:{group.Teacher.Age}, Teacher Address : {group.Teacher.Address}"
                           );
                 }
             }
@@ -346,7 +358,7 @@ namespace CourseApplication.Controllers
                     var response = _groupService.GetGroupById(id);
 
 
-                    ConsoleColor.Green.WriteConsole($"Id: {response.Id}, Name: {response.Name},{response.Capacity}");
+                    ConsoleColor.Green.WriteConsole($"Id: {response.Id}, Name: {response.Name}, Capacity :{response.Capacity}");
 
                 }
                 catch (Exception ex)

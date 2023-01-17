@@ -123,7 +123,7 @@ namespace CourseApplication.Controllers
             {
                 foreach (var item in result)
                 {
-                    ConsoleColor.Green.WriteConsole($"Id: {item.Id}, Name: {item.Name}, Surname: {item.Surname} Age: {item.Age} Address: {item.Address}");
+                    ConsoleColor.Green.WriteConsole($"Id: {item.Id}, Name: {item.Name}, Surname: {item.Surname}, Age: {item.Age}, Address: {item.Address}");
                 }
             }
         }
@@ -169,7 +169,7 @@ namespace CourseApplication.Controllers
         public void SerachTeacher()  
         {
             ConsoleColor.DarkCyan.WriteConsole("Please add search text:");
-        SearchText: string searchText = Console.ReadLine();
+        SearchText: string searchText = Console.ReadLine().Trim();
 
             if (searchText == string.Empty)
             {
@@ -199,6 +199,12 @@ namespace CourseApplication.Controllers
             ConsoleColor.DarkCyan.WriteConsole("Please add teacher id :");
         TeacherId: string teacherId = Console.ReadLine();
 
+            if (teacherId == string.Empty)
+            {
+                ConsoleColor.Red.WriteConsole("Plase, dont empty Id");
+                goto TeacherId;
+            }
+
             int id;
             bool isCorrectId = int.TryParse(teacherId, out id);
 
@@ -209,7 +215,7 @@ namespace CourseApplication.Controllers
                     var response = _teacherService.GetById(id);
 
 
-                    ConsoleColor.Green.WriteConsole($"Id: {response.Id}, Name: {response.Name}, Surname: {response.Surname} Age:{response.Age} {response.Address}");
+                    ConsoleColor.Green.WriteConsole($"Id: {response.Id}, Name: {response.Name}, Surname: {response.Surname}, Age:{response.Age}, Address :{response.Address}");
 
                 }
                 catch (Exception ex)
@@ -254,11 +260,11 @@ namespace CourseApplication.Controllers
         TeacherName: string teacherName = Console.ReadLine();
             try
             {
-                //if (!Regex.IsMatch(teacherName, pattern2))
-                //{
-                //    ConsoleColor.Cyan.WriteConsole("Please add correct teacher name");
-                //    goto TeacherName;
-                //}
+                if (!Regex.IsMatch(teacherName, pattern2))
+                {
+                    ConsoleColor.Cyan.WriteConsole("Please add correct teacher name");
+                    goto TeacherName;
+                }
             }
             catch (Exception ex)
             {
@@ -271,28 +277,28 @@ namespace CourseApplication.Controllers
             {
                 if (!Regex.IsMatch(teacherSurname, pattern2))
                 {
-                    ConsoleColor.Cyan.WriteConsole("Please add correct teacher Surname");
+                    ConsoleColor.Cyan.WriteConsole("Please add correct teacher surname");
                     goto TeacherSurname;
                 }
             }
             catch (Exception ex)
             {
-                ConsoleColor.Cyan.WriteConsole(ex.Message);
+                ConsoleColor.Red.WriteConsole(ex.Message);
             }
 
             ConsoleColor.Cyan.WriteConsole("Please add teacher address");
         TeachAddress: string teachAddress = Console.ReadLine();
             try
             {
-                //if (!Regex.IsMatch(teacherName, pattern2))
-                //{
-                //    ConsoleColor.Cyan.WriteConsole("Update correct teacher name");
-                //    goto TeachAddress;
-                //}
+                if (!Regex.IsMatch(teacherName, pattern2))
+                {
+                    ConsoleColor.Cyan.WriteConsole("Update correct teacher address ");
+                    goto TeachAddress;
+                }
             }
             catch (Exception ex)
             {
-                ConsoleColor.Cyan.WriteConsole(ex.Message);
+                ConsoleColor.Red.WriteConsole(ex.Message);
             }
 
             ConsoleColor.Cyan.WriteConsole("Please add teacher age");
@@ -305,11 +311,11 @@ namespace CourseApplication.Controllers
             try
             {
 
-                //if (!Regex.IsMatch(IdTeach, pattern2))
-                //{
-                //    ConsoleColor.Cyan.WriteConsole("Please add correct Id");
-                //    goto TeacherSurname;
-                //}
+                if (!Regex.IsMatch(IdTeach, pattern2))
+                {
+                    ConsoleColor.Red.WriteConsole("Please add correct Id");
+                    goto TeacherSurname;
+                }
                 Teacher teacher = new Teacher()
                 {
                     Name = teacherName,
@@ -321,7 +327,7 @@ namespace CourseApplication.Controllers
                 Teacher teacher1 = new();
                 teacher1 = _teacherService.Update(id, teacher);
 
-                ConsoleColor.Cyan.WriteConsole("Succesfully updated");
+                ConsoleColor.Green.WriteConsole("Succesfully updated");
             }
             catch (Exception ex)
             {

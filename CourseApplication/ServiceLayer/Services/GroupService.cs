@@ -46,7 +46,7 @@ namespace ServiceLayer.Services
             return group;
         }
 
-        public List<Group> GetGroupsByCapcity(int? capacity)
+        public List<Group> GetGroupsByCapacity(int? capacity)
         {
             if (capacity == null) throw new NotFoundException(ResponseMessages.NotFound);
             List<Group> dbGroups = _repo.GetAll(m => m.Capacity == capacity);
